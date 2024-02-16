@@ -1,0 +1,44 @@
+{% extends 'base.html' %} 
+{% load static %} <!-- Extend base.html template -->
+
+{% block title %}Home - Ategram Government Primary School{% endblock %}  <!-- Define title for the page -->
+
+{% block content %}  <!-- Define content block -->
+<style>
+    .image-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Adjust as needed */
+    }
+
+    .school-image {
+        width: 45%; /* Adjust the width as needed */
+        margin: 0 10px; /* Adjust margin as needed for spacing */
+        border-radius: 5px; /* Add border radius for a rounded look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    }
+
+    /* Media query for responsiveness */
+    @media only screen and (max-width: 768px) {
+        .image-container {
+            flex-direction: column;
+        }
+
+        .school-image {
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+</style>
+
+<section class="showcase">
+    <div class="container" style="text-align: center;">
+        <h1>Welcome to Ategram Government Primary School</h1>
+        <div class="image-container">
+            <img src="{% static 'core/images/ategram2.jpg' %}" alt="School Image" class="school-image">  <!-- Static image from the 'core/images' directory -->
+            <img src="{% static 'core/images/ategram1.jpg' %}" alt="Another Image" class="school-image">  <!-- Static image from the 'core/images' directory -->
+        </div>
+        <p>Empowering young minds for a brighter future.</p>
+    </div>
+</section>
+{% endblock %}  <!-- End content block -->

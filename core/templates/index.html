@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% load static %} <!-- Extend base.html template -->
+
+{% block title %}Home - Ategram Government Primary School{% endblock %}  <!-- Define title for the page -->
+
+{% block content %}  <!-- Define content block -->
+<section class="showcase">
+    <div class="container" style="text-align: center;">
+        <h1>Welcome to Ategram Government Primary School</h1>
+        <div class="image-container">
+            <img src="{% static 'core/images/ategram2.jpg' %}" alt="School Image" class="school-image">  <!-- Static image from the 'core/images' directory -->
+            <img src="{% static 'core/images/ategram1.jpg' %}" alt="Another Image" class="school-image">  <!-- Static image from the 'core/images' directory -->
+        </div>
+        <p>Empowering young minds for a brighter future.</p>
+    </div>
+</section>
+{% endblock %}  <!-- End content block -->

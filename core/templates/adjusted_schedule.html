@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Regular Schedule{% endblock %}
+
+{% block content %}
+    <div class="schedule-container">
+        <div class="header-container">
+            <h1 class="schedule-title">Updated Schedule for {{date}}</h1>
+        </div>
+        <div class="schedule-table-container">
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th class="class-column">Class/Period</th>
+                            <!-- Generate table headers for unique periods -->
+                            {% for period in unique_periods %}
+                                <th class="period-column">{{ period.start_time }} - {{ period.end_time }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through each class -->
+                        {% for class_instance, schedule in class_schedules.items %}
+                            <tr>
+                                <td class="class-column">{{ class_instance.class_name }}</td>
+                                <!-- Loop through unique periods -->
+                                {% for period in unique_periods %}
+                                    <td class="period-column" style="background-color: #FFFFFF;">  {# Ensure the background is white by default #}
+                                        {% for routine_period, routine in schedule.items %}
+                                            {% if routine_period.start_time == period.start_time and routine_period.end_time == period.end_time %}
+                                                {% if routine %}
+                                                    <!-- Apply inline style for background and font color -->
+                                                    <span style="background-color: {{ routine.assigned_teacher.color }}; color: #000000; display: block; padding: 10px;">
+                                                        <b>{{ routine_period.subject.subject_name }}</b> - {{ routine.assigned_teacher.name }}
+                                                    </span>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}

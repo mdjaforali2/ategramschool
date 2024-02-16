@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Report Teacher Absence
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h2 class="text-center">Temporary Schedules</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">Absent Teacher</th>
+                                    <th style="text-align: center;">Routine</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for absence in absences %}
+                                <tr>
+                                    <td>
+                                        {% if absence.day %}
+                                            {{ absence.day }}
+                                        {% else %}
+                                            Default Routine
+                                        {% endif %}
+                                    </td> 
+                                    <td>
+                                            {{ absence.teacher.name }}
+                                    </td>  
+                                    <td>
+                                        {% if absence.day %}
+                                            <a href="{% url 'adjusted_schedule' absence.day|date:'Y-m-d' %}" class="btn btn-primary">Updated Schedule</a>
+                                        {% else %}
+                                            <a href="{% url 'regular_schedule' %}" class="btn btn-primary">Regular Schedule</a>
+                                        {% endif %}
+                                    </td>                 
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h2 class="text-center">Report Teacher Absence</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.as_p }}
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!-- temporary_schedules.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Temporary Schedules{% endblock %}
+
+{% block content %}
+<div class="header-container d-flex align-items-center justify-content-center">
+    <h1 class="schedule-title">Temporary Schedules</h1>
+</div>
+
+<div class="schedule-table-container d-flex align-items-center justify-content-center">
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Date</th>
+                <th style="text-align: center;">Absent Teacher</th>
+                <th style="text-align: center;">Routine</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for absence in absences %}
+            <tr>
+                <td>
+                    {% if absence.day %}
+                        {{ absence.day }}
+                    {% else %}
+                        Default Routine
+                    {% endif %}
+                </td> 
+                <td>
+                        {{ absence.teacher.name }}
+                </td>  
+                <td>
+                    {% if absence.day %}
+                        <a href="{% url 'adjusted_schedule' absence.day|date:'Y-m-d' %}" class="btn btn-primary">Updated Schedule</a>
+                    {% else %}
+                        <a href="{% url 'regular_schedule' %}" class="btn btn-primary">Regular Schedule</a>
+                    {% endif %}
+                </td>                 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

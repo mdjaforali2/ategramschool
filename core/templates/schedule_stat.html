@@ -1,0 +1,22 @@
+<!-- Display teacher statistics -->
+<div class="teacher-statistics">
+    <h3>Teacher Statistics</h3>
+    <table class="teacher-stats-table">
+        <thead>
+            <tr>
+                <th>Teacher Name</th>
+                <th>Number of Periods</th>
+                <th>Total Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher, stats in teacher_stats.items %}
+                <tr>
+                    <td>{{ teacher.name }}</td>
+                    <td>{{ stats.num_periods }}</td>
+                    <td>{{ stats.total_hours }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
